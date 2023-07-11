@@ -1,3 +1,9 @@
 {
-  "rust-analyzer.linkedProjects": ["./guessing-game/Cargo.toml", "./hello-var/Cargo.toml", "./hello-function/Cargo.toml"]
+  "rust-analyzer.linkedProjects": [
+    "./guessing-game/Cargo.toml",
+    "./hello-rust/Cargo.toml", 
+    "./hello-var/Cargo.toml", 
+    "./hello-function/Cargo.toml", 
+    "./hello-control/Cargo.toml"
+  ]
 }
