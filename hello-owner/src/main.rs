@@ -37,8 +37,83 @@ fn main() {
     print_str(&sB);
 
     println!("这里还能输出sB吗? --- {}", sB);
+
+    no_dangle();
+
+    let len = first_word(&String::from("value"));
+    println!("字符串长度: {}", len);
+
+    let len_a = first_word(&"a bc sdfsdf".to_string());
+    println!("字符串长度: {}", len_a);
+
+    str_slice();
 }
 
 fn print_str<T: Display>(str: T) {
     println!("print str: {}", str);
+}
+
+// 注意避免出现悬垂指针问题
+fn no_dangle() -> String {
+    // let s = "abc";
+    // return s.to_string();
+
+    let s = String::from("abcs");
+    return s;
+}
+
+fn first_word(s: &String) -> usize {
+    // 转为字节数组
+    let bytes = s.as_bytes();
+
+    // 使用iter创建迭代器
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    return s.len();
+}
+
+fn str_slice() {
+    let s = String::from("Hello World!");
+
+    let hello = &s[0..5];
+    let world = &s[6..12];
+    let hello_no_zero = &s[..5];
+    let len: usize = s.len();
+    let world_no_end = &s[..len];
+
+    println!("Hello ---- {}", hello);
+    println!("World! --- {}", world);
+    println!("hello_no_zero! --- {}", hello_no_zero);
+    println!("world_no_end! --- {}", world_no_end);
+
+    println!("输出单词 {}", first_word_str(&s));
+
+    let s_str = "ab c";
+    println!("first world: {}", first_word_str(s_str));
+
+    let a = [1, 2, 3, 4, 5];
+    let a_slice = &a[1..3];
+    assert_eq!(
+        a_slice,
+        &[2, 3],
+        "we are testing addition with {:?} and {:?}",
+        a_slice,
+        &[2, 3]
+    );
+}
+
+fn first_word_str(s: &str) -> &str {
+    let bytes: &[u8] = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+
+    return &s[..];
 }
