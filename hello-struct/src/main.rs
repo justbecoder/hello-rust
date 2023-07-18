@@ -18,6 +18,12 @@ struct Rectangle {
     height: u32,
 }
 
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
 fn build_user(email: String, username: String) -> User {
     return User {
         active: true,
@@ -98,4 +104,12 @@ fn main() {
     let a: &u32 = &rect1.height;
 
     println!("rect height {} --- a {} ", rect1.height, a);
+
+    // rect2是Rectangle的实例
+    let rect2 = Rectangle {
+        width: 400,
+        height: 200,
+    };
+
+    println!("area is {}", rect2.area());
 }
