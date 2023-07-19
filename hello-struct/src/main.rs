@@ -19,8 +19,22 @@ struct Rectangle {
 }
 
 impl Rectangle {
+    // 方法
     fn area(&self) -> u32 {
         self.width * self.height
+    }
+
+    // 方法 - 传递参数
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    // 关联函数，不同于方法，调用时使用::
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
     }
 }
 
@@ -112,4 +126,9 @@ fn main() {
     };
 
     println!("area is {}", rect2.area());
+
+    println!("rect2 can hod rect1 === {}", rect2.can_hold(&rect1));
+
+    // 注意这个位置的调用方式，square是Rectangle的一个关联函数，不是一个方法
+    println!("a square {:?}", Rectangle::square(29))
 }
