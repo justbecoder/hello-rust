@@ -48,4 +48,6 @@ fn main() {
 
     println!("{:?}，数组索引取值{}", a, a[0]);
     println!("{:?}，元组索引取值{}", tup, tup.0);
+
+    let [b, c, s, r, t] = a;
 }
